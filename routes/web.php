@@ -16,3 +16,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/testing', function() {
+    return 'Hello World';
+});
+
+Route::redirect('/sosmed', '/testing');
+
+// handling route 404 | not found
+Route::fallback(function() {
+    return '404';
+});
