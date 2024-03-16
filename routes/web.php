@@ -23,6 +23,16 @@ Route::get('/testing', function() {
 
 Route::redirect('/sosmed', '/testing');
 
+// Routing view
+Route::get('/hello', function() {
+    return view('hello', ['name' => 'mursidin']);
+});
+
+// View Nested
+Route::get('/nested', function() {
+    return view('nested.hello', ['nestedname' => 'antonio']);
+});
+
 // handling route 404 | not found
 Route::fallback(function() {
     return '404';
