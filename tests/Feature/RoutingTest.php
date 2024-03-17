@@ -24,7 +24,7 @@ class RoutingTest extends TestCase
     public function testFallback()
     {
         $this->get('/tidak')
-            ->assertSeeText('404');
+            ->assertSeeText('404 Not Found');
     }
 
     // Routing Parameter
@@ -45,5 +45,17 @@ class RoutingTest extends TestCase
         $this->get('/products/2/items/fiting')
              ->assertStatus(200)
              ->assertSeeText('Products 2, Items fiting');
+    }
+
+    // Routing Parameter Regex
+    public function testRoutingRegex()
+    {
+        $this->get('categories/10')
+             ->assertStatus(200)
+             ->assertSeeText('Category 10');
+
+        $this->get('/categories/notnummber')
+             ->assertStatus(200)
+             ->assertSeeText('404 Not Found');
     }
 }

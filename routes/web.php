@@ -33,6 +33,11 @@ Route::get('/products/{product}/items/{item}', function($productId, $itemId) {
     return "Products ${productId}, Items {$itemId}";
 });
 
+// Routing Parameter Regex
+Route::get('categories/{id}', function($categoryId) {
+    return "Category $categoryId";
+})->where('id', '[0-9]+');
+
 // Routing view
 Route::get('/hello', function() {
     return view('hello', ['name' => 'mursidin']);
@@ -45,5 +50,5 @@ Route::get('/nested', function() {
 
 // handling route 404 | not found
 Route::fallback(function() {
-    return '404';
+    return '404 Not Found';
 });
