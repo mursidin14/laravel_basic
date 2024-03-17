@@ -38,6 +38,11 @@ Route::get('categories/{id}', function($categoryId) {
     return "Category $categoryId";
 })->where('id', '[0-9]+');
 
+// Routing Parameter Optional
+Route::get('/users/{id?}', function($userId = '404') {
+    return "user ${userId}";
+});
+
 // Routing view
 Route::get('/hello', function() {
     return view('hello', ['name' => 'mursidin']);

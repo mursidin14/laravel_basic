@@ -58,4 +58,16 @@ class RoutingTest extends TestCase
              ->assertStatus(200)
              ->assertSeeText('404 Not Found');
     }
+
+    // Routing Parameter Optional
+    public function testRoutingOptional()
+    {
+        $this->get('users/rudy')
+             ->assertStatus(200)
+             ->assertSeeText('user rudy');
+
+        $this->get('users/')
+             ->assertStatus(200)
+             ->assertSeeText('user 404');
+    }
 }
