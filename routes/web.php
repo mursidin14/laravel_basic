@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Routing
 Route::get('/', function () {
     return view('welcome');
 });
@@ -22,6 +23,15 @@ Route::get('/testing', function() {
 });
 
 Route::redirect('/sosmed', '/testing');
+
+// Routing parameter
+Route::get('/products/{id}', function($productId){
+    return "Products ${productId}";
+});
+
+Route::get('/products/{product}/items/{item}', function($productId, $itemId) {
+    return "Products ${productId}, Items {$itemId}";
+});
 
 // Routing view
 Route::get('/hello', function() {

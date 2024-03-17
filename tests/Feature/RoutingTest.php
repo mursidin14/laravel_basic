@@ -26,4 +26,24 @@ class RoutingTest extends TestCase
         $this->get('/tidak')
             ->assertSeeText('404');
     }
+
+    // Routing Parameter
+    public function testRoutingParameter()
+    {
+        $this->get('/products/1')
+             ->assertStatus(200)
+             ->assertSeeText('Products 1');
+
+        $this->get('/products/2')
+             ->assertStatus(200)
+             ->assertSeeText('Products 2');
+
+        $this->get('/products/1/items/lampu')
+             ->assertStatus(200)
+             ->assertSeeText('Products 1, Items lampu');
+
+        $this->get('/products/2/items/fiting')
+             ->assertStatus(200)
+             ->assertSeeText('Products 2, Items fiting');
+    }
 }
