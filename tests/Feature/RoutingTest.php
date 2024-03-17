@@ -70,4 +70,15 @@ class RoutingTest extends TestCase
              ->assertStatus(200)
              ->assertSeeText('user 404');
     }
+
+    // Routing Parameter Named
+    public function testRoutingNamed()
+    {
+        $this->get('product/123')
+             ->assertStatus(200)
+             ->assertSeeText('Link http://localhost/products/123');
+
+        $this->get('product-redirect/123')
+             ->assertRedirect('/products/123');
+    }
 }

@@ -27,20 +27,30 @@ Route::redirect('/sosmed', '/testing');
 // Routing parameter
 Route::get('/products/{id}', function($productId){
     return "Products ${productId}";
-});
+})->name('product.detail');
 
 Route::get('/products/{product}/items/{item}', function($productId, $itemId) {
     return "Products ${productId}, Items {$itemId}";
-});
+})->name('product.item.detail');
 
 // Routing Parameter Regex
 Route::get('categories/{id}', function($categoryId) {
     return "Category $categoryId";
-})->where('id', '[0-9]+');
+})->where('id', '[0-9]+')->name('category.detail');
 
 // Routing Parameter Optional
 Route::get('/users/{id?}', function($userId = '404') {
     return "user ${userId}";
+});
+
+// Routing named product
+Route::get('product/{id}', function($productId) {
+    $link = route('product.detail', ['id' => $productId]);
+    return "Link $link";
+});
+
+Route::get('product-redirect/{id}', function($id) {
+    return redirect()->route('product.detail', ['id' => $id]);
 });
 
 // Routing view
