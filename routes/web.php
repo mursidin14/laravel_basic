@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controller\HelloController;
+use App\Http\Controllers\HelloController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,6 +65,7 @@ Route::get('/nested', function() {
 });
 
 // Controller
+Route::get('controller/hello/request', [HelloController::class, 'request']);
 Route::get('controller/hello', [HelloController::class, 'hello']);
 
 // handling route 404 | not found
