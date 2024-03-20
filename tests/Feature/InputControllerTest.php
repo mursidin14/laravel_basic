@@ -58,4 +58,39 @@ class InputControllerTest extends TestCase
         ])
         ->assertSeeText('Andi')->assertSeeText('true')->assertSeeText('1990-10-10');
     }
+
+    public function testFilterOnly()
+    {
+        $this->post('/input/filter/only', [
+            'name' => [
+                'first' => 'Antoni',
+                'middle' => 'anderson',
+                'last' => 'junior'
+            ]
+        ])->assertSeeText('Antoni')
+        ->assertDontSeeText('anderson')
+        ->assertSeeText('junior');
+    }
+
+    public function testFilterExcept()
+    {
+        $this->post('/input/filter/except', [
+            'username' => 'antony',
+            'admin' => 'true',
+            'password' => 'password'
+        ])->assertSeeText('antony')
+        ->assertDontSeeText('true')
+        ->assertSeeText('password');
+    }
+
+    public function testFilterMarge()
+    {
+        $this->post('/input/filter/marge', [
+            'username' => 'antony',
+            'admin' => 'true',
+            'password' => 'password',
+        ])->assertSeeText('antony')
+          ->assertSeeText('admin')->assertSeeText('false')
+          ->assertSeeText('password');
+    }
 }

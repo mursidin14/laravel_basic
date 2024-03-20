@@ -76,6 +76,9 @@ Route::post('/input/hello/first', [InputController::class, 'helloFirst']);
 Route::post('/input/hello/input', [InputController::class, 'helloInput']);
 Route::post('/input/hello/array', [InputController::class, 'arrayInput']);
 Route::post('/input/type', [InputController::class, 'inputType']);
+Route::post('/input/filter/only', [InputController::class, 'filterOnly']);
+Route::post('/input/filter/except', [InputController::class, 'filterExcept']);
+Route::post('input/filter/marge', [InputController::class, 'filterMarge']);
 
 // handling route 404 | not found
 Route::fallback(function() {
