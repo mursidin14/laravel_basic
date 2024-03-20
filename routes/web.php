@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HelloController;
 use App\Http\Controllers\InputController;
@@ -79,6 +80,9 @@ Route::post('/input/type', [InputController::class, 'inputType']);
 Route::post('/input/filter/only', [InputController::class, 'filterOnly']);
 Route::post('/input/filter/except', [InputController::class, 'filterExcept']);
 Route::post('input/filter/marge', [InputController::class, 'filterMarge']);
+
+// File upload controller
+Route::post('/file/upload', [FileController::class, 'upload']);
 
 // handling route 404 | not found
 Route::fallback(function() {
