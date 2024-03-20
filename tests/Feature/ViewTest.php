@@ -12,7 +12,7 @@ class ViewTest extends TestCase
     {
         $this->get('/hello')
             ->assertStatus(200)
-            ->assertSeeText('Hello mursidin');  
+            ->assertSeeText('hello mursidin');  
     }
 
     public function testNested()
@@ -25,7 +25,7 @@ class ViewTest extends TestCase
     public function testTemplate()
     {
         $this->view('hello', ['name' => 'mursidin'])
-             ->assertSeeText('Hello mursidin');
+             ->assertSeeText('hello mursidin');
 
         $this->view('nested.hello', ['nestedname' => 'mursidin'])
              ->assertSeeText('Nested, hello mursidin');

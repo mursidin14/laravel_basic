@@ -4,6 +4,7 @@ use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HelloController;
 use App\Http\Controllers\InputController;
+use App\Http\Controllers\ResponseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,6 +84,14 @@ Route::post('input/filter/marge', [InputController::class, 'filterMarge']);
 
 // File upload controller
 Route::post('/file/upload', [FileController::class, 'upload']);
+
+// Response
+Route::get('/response/hello', [ResponseController::class, 'response']);
+Route::get('/response/header', [ResponseController::class, 'header']);
+Route::get('/response/type/view', [ResponseController::class, 'responseView']);
+Route::get('/response/type/json', [ResponseController::class, 'responseJson']);
+Route::get('/response/type/file', [ResponseController::class, 'responseFile']);
+Route::get('/response/type/download', [ResponseController::class, 'responseDownload']);
 
 // handling route 404 | not found
 Route::fallback(function() {

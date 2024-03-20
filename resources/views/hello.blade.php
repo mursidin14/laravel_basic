@@ -6,6 +6,6 @@
     <title>Laraver Dasar</title>
 </head>
 <body>
-    <h3>Hello {{ $name }} </h3>
+    <h3>hello {{ $name }} </h3>
 </body>
 </html>
