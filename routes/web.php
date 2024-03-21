@@ -7,6 +7,8 @@ use App\Http\Controllers\HelloController;
 use App\Http\Controllers\InputController;
 use App\Http\Controllers\RedirectController;
 use App\Http\Controllers\ResponseController;
+use App\Http\Middleware\ContohMiddleware;
+use App\Http\Middleware\VerifyCsrfToken;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,7 +87,7 @@ Route::post('/input/filter/except', [InputController::class, 'filterExcept']);
 Route::post('input/filter/marge', [InputController::class, 'filterMarge']);
 
 // File upload controller
-Route::post('/file/upload', [FileController::class, 'upload']);
+Route::post('/file/upload', [FileController::class, 'upload'])->withoutMiddleware([VerifyCsrfToken::class]);
 
 // Response
 Route::get('/response/hello', [ResponseController::class, 'response']);
@@ -107,6 +109,14 @@ Route::get('/redirect/name', [RedirectController::class, 'redirectName']);
 Route::get('/redirect/name/{name}', [RedirectController::class, 'redirectHello'])->name('redirect-hello');
 Route::get('/redirect/action', [RedirectController::class, 'redirectAction']);
 Route::get('/redirect/yt', [RedirectController::class, 'redirectAway']);
+
+// middleware local
+Route::get('/middleware/api', function() {
+    return "Ok";
+})->middleware(['contoh:PZN,401']);
+Route::get('/middleware/group', function() {
+    return "Group";
+})->middleware('PZN');
 
 // handling route 404 | not found
 Route::fallback(function() {
