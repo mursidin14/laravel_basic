@@ -93,15 +93,21 @@ Route::post('/file/upload', [FileController::class, 'upload'])->withoutMiddlewar
 // Response
 Route::get('/response/hello', [ResponseController::class, 'response']);
 Route::get('/response/header', [ResponseController::class, 'header']);
-Route::get('/response/type/view', [ResponseController::class, 'responseView']);
-Route::get('/response/type/json', [ResponseController::class, 'responseJson']);
-Route::get('/response/type/file', [ResponseController::class, 'responseFile']);
-Route::get('/response/type/download', [ResponseController::class, 'responseDownload']);
+
+// Route Grouping
+Route::prefix('/response/type')->group(function() {
+    Route::get('/view', [ResponseController::class, 'responseView']);
+    Route::get('/json', [ResponseController::class, 'responseJson']);
+    Route::get('/file', [ResponseController::class, 'responseFile']);
+    Route::get('/download', [ResponseController::class, 'responseDownload']);
+});
 
 // cookie
-Route::get('/cookie/set', [CookieController::class, 'createCookie']);
-Route::get('/cookie/get', [CookieController::class, 'getCookie']);
-Route::get('/cookie/clear', [CookieController::class, 'clearCookie']);
+Route::controller(CookieController::class)->group(function() {
+    Route::get('/cookie/set', 'createCookie');
+    Route::get('/cookie/get', 'getCookie');
+    Route::get('/cookie/clear', 'clearCookie');
+});
 
 // Redurect
 Route::get('/redirect/to', [RedirectController::class, 'redirectTo']);
@@ -111,13 +117,15 @@ Route::get('/redirect/name/{name}', [RedirectController::class, 'redirectHello']
 Route::get('/redirect/action', [RedirectController::class, 'redirectAction']);
 Route::get('/redirect/yt', [RedirectController::class, 'redirectAway']);
 
-// middleware local
-Route::get('/middleware/api', function() {
-    return "Ok";
-})->middleware(['contoh:PZN,401']);
-Route::get('/middleware/group', function() {
-    return "Group";
-})->middleware('PZN');
+// middleware group local
+Route::middleware(['contoh:PZN,401'])->prefix('/middleware')->group(function() {
+    Route::get('/api', function() {
+        return "Ok";
+    });
+    Route::get('/group', function() {
+        return "Group";
+    });
+});
 
 // CSRF (cross-site-request-forgery)
 Route::get('/form', [FormController::class, 'form']);
