@@ -131,6 +131,30 @@ Route::middleware(['contoh:PZN,401'])->prefix('/middleware')->group(function() {
 Route::get('/form', [FormController::class, 'form']);
 Route::post('/form', [FormController::class, 'submitForm']);
 
+// Url-Generation
+Route::get('/url/current', function() {
+    return Illuminate\Support\Facades\URL::full();
+});
+
+Route::get('/url/named', function() {
+
+    // this below is option step
+
+    // return route('redirect-hello', ['name' => 'mursidin']);
+    // return url()->route('redirect-hello', ['name' => 'mursidin']);
+    return Illuminate\Support\Facades\URL::route('redirect-hello', ['name' => 'mursidin']);
+});
+
+Route::get('/url/action', function() {
+
+    // this below is option step
+
+    // return action([FormController::class, 'form'], []);
+    // return url()->action([FormController::class, 'form'], []);
+    return \Illuminate\Support\Facades\URL::action([FormController::class, 'form'], []);
+});
+Route::get('/form', [FormController::class, 'form'], []);
+
 // handling route 404 | not found
 Route::fallback(function() {
     return '404 Not Found';
