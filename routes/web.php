@@ -175,6 +175,19 @@ Route::get('/error/validation', function() {
     throw new ValidationException('Validation Error');
 });
 
+// http-exception abort
+Route::get('/abort/400', function() {
+    abort(400);
+});
+
+Route::get('/abort/401', function() {
+    abort(401);
+});
+
+Route::get('/abort/500', function() {
+    abort(500);
+});
+
 // handling route 404 | not found
 Route::fallback(function() {
     return '404 Not Found';
